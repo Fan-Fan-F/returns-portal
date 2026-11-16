@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>退货中心 · Returns Portal</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="head">
+    <h1>📦 自助退货中心</h1>
+    <p>查订单 → 选商品 → 提交申请 → 跟踪售后进度，全程自助</p>
+  </header>
+
+  <!-- 视图1：查订单 -->
+  <section id="viewLookup" class="card">
+    <h2>第一步：查找订单</h2>
+    <div class="lookup-row">
+      <input id="orderNoInput" placeholder="输入订单号，如 SP2026102883">
+      <button id="lookupBtn" class="primary-sm">查询</button>
+    </div>
+    <div class="demo-orders">
+      <span>演示订单：</span>
+      <button class="demo-no" data-no="SP2026102883">SP2026102883</button>
+      <button class="demo-no" data-no="SP2026110512">SP2026110512</button>
+      <button class="demo-no" data-no="SP2026111247">SP2026111247</button>
+    </div>
+    <p class="err" id="lookupErr" hidden>未找到该订单，请核对订单号</p>
+  </section>
+
+  <!-- 视图2：选择退货商品 -->
+  <section id="viewSelect" class="card" hidden>
+    <h2>第二步：选择要退的商品</h2>
+    <div id="orderMeta" class="order-meta"></div>
+    <div id="itemList"></div>
+    <div class="form-block">
+      <label>退货原因
+        <select id="reasonSelect"></select>
+      </label>
+      <label>问题描述（选填）
+        <textarea id="descInput" placeholder="补充描述问题，有助于加快审核…"></textarea>
+      </label>
+      <label>退款方式
+        <div class="refund-row">
+          <label class="radio"><input type="radio" name="refund" value="original" checked> 原路退回</label>
+          <label class="radio"><input type="radio" name="refund" value="balance"> 退至余额</label>
+        </div>
+      </label>
+    </div>
+    <div class="btn-row">
+      <button class="ghost" id="backToLookup">重新查订单</button>
+      <button class="primary" id="submitRma">提交退货申请</button>
+    </div>
+    <p class="err" id="selectErr" hidden>请至少选择一件商品</p>
+  </section>
+
+  <!-- 视图3：进度跟踪 -->
+  <section id="viewTrack" class="card" hidden>
+    <h2>售后单 <span id="rmaNo" class="mono"></span></h2>
+    <div id="trackSummary" class="order-meta"></div>
+    <div class="timeline" id="timeline"></div>
+
+    <div id="shipForm" class="form-block" hidden>
+      <h3>填写寄回物流</h3>
+      <div class="ship-grid">
+        <label>快递公司
+          <select id="carrierSelect">
+            <option>顺丰速运</option><option>中通快递</option><option>圆通速递</option>
+            <option>韵达快递</option><option>京东物流</option><option>EMS</option>
+          </select>
+        </label>
+        <label>运单号<input id="trackingInput" placeholder="SF1234567890"></label>
+      </div>
+      <button class="primary-sm" id="shipBtn">确认寄出</button>
+    </div>
+
+    <!-- 演示控制（模拟商家侧动作） -->
+    <div class="sim-box">
+      <span>🔧 演示：模拟商家动作</span>
+      <div class="sim-btns" id="simBtns"></div>
+    </div>
+  </section>
+
+  <section id="myRmas" class="card" hidden>
+    <h2>我的售后记录</h2>
+    <div id="rmaList"></div>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
